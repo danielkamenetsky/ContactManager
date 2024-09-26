@@ -11,4 +11,17 @@
   <li>No contacts found.</li>
   {% endfor %}
 </ul>
-{% endblock %}
+{% endblock%} {% comment %}
+<h1>Contacts</h1>
+<ul>
+  {% for contact in contacts %}
+  <li>
+    <a href="% url 'contacts_detail' contact.pk %}">
+      {{ contact.first_name }} {{ contact.last_name }} </a
+    >"
+  </li>
+  {% empty %}
+  <li>No contacts found.</li>
+  {% endfor %}
+</ul>
+{% endblock %} {% endcomment %}
