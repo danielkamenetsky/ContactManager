@@ -1,7 +1,7 @@
-{% extends 'home.html' %}
+{% extends 'base.html' %}
 {% block content %}
 <h1>Contacts</h1>
-<a href="{% url 'add_contact' %}">Add New Contact</a> 
+{#{<a href="{% url 'add_contact' %}">Add New Contact</a> } #}
 <ul>
   {% for contact in contacts %}
   <li>
