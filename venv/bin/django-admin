@@ -1,4 +1,4 @@
-#!/Users/danielkamenetsky/Documents/Github/ContactManager/venv/bin/python3.11
+#!/Users/danielkamenetsky/Documents/Github/CryptoTransactions/venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys

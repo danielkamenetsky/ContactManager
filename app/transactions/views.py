@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from.models import Transaction
 from .forms import TransactionForm
@@ -16,7 +16,7 @@ def transaction_list(request):
 
 
 def transaction_detail(request, pk):  
-    transaction = Transaction.objects.get(pk=pk)  
+    transaction = get_object_or_404(Transaction, pk=pk)
     return render(request, 'transactions/transaction_detail.html', {'transaction': transaction})  # Passing 'transaction'
 
 
