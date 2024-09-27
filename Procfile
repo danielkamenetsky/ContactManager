@@ -1,1 +1,1 @@
-   web: gunicorn transaction_tracker.wsgi:application --log-file -
+web: gunicorn app.transaction_tracker.wsgi:application --log-file -
