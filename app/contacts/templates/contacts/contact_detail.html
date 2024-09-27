@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-
-{% block content %}
-  <h1>{{ contact.first_name }} {{ contact.last_name }}</h1>
-  <p>Phone: {{ contact.phone }}</p>
-  <p>Email: {{ contact.email }}</p>
-  <p>Address: {{ contact.address }}</p>
-  <a href="{% url 'contact_list' %}">Back to Contacts</a>
-{% endblock %}

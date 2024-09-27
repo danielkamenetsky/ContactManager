@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Transaction Details for {{ transaction.transaction_id }}</h1>
+<p>Ticker: {{ transaction.ticker }}</p>
+<p>Exchange: {{ transaction.exchange }}</p>
+<p>Amount: {{ transaction.amount }}</p>
+<p>Price: {{ transaction.price }}</p>
+<p>Date: {{ transaction.date }}</p>
+<a href="{% url 'transaction_list' %}">Back to transactions</a>
+{% endblock %}
