@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block header %}
+<h1>Welcome to the Crypto Tracker</h1>
+{% endblock %} {% block content %}
+<p>Manage your transactions efficiently.</p>
+<hr />
+<ul>
+  <li><a href="{% url 'transaction_list' %}">View Transactions</a></li>
+</ul>
+{% endblock %}
