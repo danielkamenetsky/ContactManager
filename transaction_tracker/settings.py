@@ -29,7 +29,8 @@ SECRET_KEY = 'django-insecure-lq&upib1ln(n4jnvzpkm-j$d+kk8hlf2@l2^#11ouut)c#uy=g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://magical-coin-tracker-e4f3fa405d71.herokuapp.com/', 'localhost']
+
+ALLOWED_HOSTS = ['magical-coin-tracker-e4f3fa405d71.herokuapp.com/', 'localhost']
 
 
 
