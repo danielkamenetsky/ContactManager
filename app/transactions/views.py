@@ -15,8 +15,8 @@ def transaction_list(request):
     return render(request, 'transactions/transaction_list.html', {'transactions': transactions})
 
 
-def transaction_detail(request, pk):  
-    transaction = get_object_or_404(Transaction, pk=pk)
+def transaction_detail(request, transaction_id):  
+    transaction = get_object_or_404(Transaction, transaction_id=transaction_id)
     return render(request, 'transactions/transaction_detail.html', {'transaction': transaction})  # Passing 'transaction'
 
 

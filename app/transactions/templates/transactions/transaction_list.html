@@ -5,7 +5,7 @@
   {% for transaction in transactions %}
   <li>
     <a href="{% url 'transaction_detail' transaction.transaction_id %}">
-      {{ transaction.transaction_id }} - {{ transaction.ticker }}
+      {{ transaction.transaction_id }}
     </a>
   </li>
   {% empty %}
