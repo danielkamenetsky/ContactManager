@@ -17,3 +17,6 @@ db.sqlite3
 # Ignore other system files
 .DS_Store
 *.log
+
+# Ignore Node.js modules
+node_modules/
