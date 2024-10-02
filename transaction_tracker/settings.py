@@ -92,19 +92,26 @@ DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL'),
         conn_max_age=600,
-        ssl_require=True,
     )
 }
 
+# If DATABASE_URL is not set (local development), use these settings
 if not os.environ.get('DATABASE_URL'):
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
+        'NAME': os.environ.get('DB_NAME', 'tracker_database'),
+        'USER': os.environ.get('DB_USER', 'dbuser'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'password123'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': os.environ.get('DB_PORT', '5432'),
+        'OPTIONS': {
+            'sslmode': 'disable',
+        },
     }
+else:
+    # For Heroku, ensure SSL is used
+    DATABASES['default'].update({'SSL_REQUIRE': True})
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
