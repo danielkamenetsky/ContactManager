@@ -18,12 +18,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 # Function to get environment variables
-def get_env_variable(var_name):
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        error_msg = f"Set the {var_name} environment variable"
-        raise ImproperlyConfigured(error_msg)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -95,9 +90,9 @@ WSGI_APPLICATION = 'transaction_tracker.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f'postgres://{get_env_variable("DB_USER")}:{get_env_variable("DB_PASSWORD")}@{get_env_variable("DB_HOST")}/{get_env_variable("DB_NAME")}',
+        default=os.environ.get('DATABASE_URL'),
         conn_max_age=600,
-        ssl_require=True
+        ssl_require=True,
     )
 }
 
