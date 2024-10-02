@@ -52,6 +52,7 @@ The application is deployed on Heroku and can be accessed [here](<https://magica
 
 8. Run the development server
     ```bash
+    python manage.py runserver
 
 
 ## Usage
