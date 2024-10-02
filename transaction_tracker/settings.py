@@ -15,6 +15,7 @@ from pathlib import Path
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
+
 load_dotenv()
 # Function to get environment variables
 def get_env_variable(var_name):
@@ -33,7 +34,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_env_variable('DJANGO_SECRET_KEY')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'default-secret-key-for-dev')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -95,7 +96,8 @@ WSGI_APPLICATION = 'transaction_tracker.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default=f'postgres://{get_env_variable("DB_USER")}:{get_env_variable("DB_PASSWORD")}@{get_env_variable("DB_HOST")}/{get_env_variable("DB_NAME")}',
-        conn_max_age=600
+        conn_max_age=600,
+        ssl_require=True
     )
 }
 # Password validation
