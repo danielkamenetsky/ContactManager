@@ -13,7 +13,7 @@ Crypto Transaction Manager is a web application that allows users to record, edi
 
 ## Live Demo
 
-The application is deployed on Heroku and can be acessed [here](<https://magical-coin-tracker-e4f3fa405d71.herokuapp.com/>).
+The application is deployed on Heroku and can be accessed [here](<https://magical-coin-tracker-e4f3fa405d71.herokuapp.com/>).
 
 
 ## Installation
