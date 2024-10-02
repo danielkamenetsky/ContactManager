@@ -27,7 +27,7 @@ def add_transaction(request):
         form = TransactionForm(request.POST)
         if form.is_valid():
             transaction = form.save()
-            return redirect('transaction_detail', pk=transaction.id)
+            return redirect('transaction_detail', transaction_id=transaction.id)
     else:
         form = TransactionForm()
     return render(request, 'transactions/add_transaction.html', {'form': form})
