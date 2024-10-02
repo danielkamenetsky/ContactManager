@@ -8,6 +8,7 @@ urlpatterns = [
     path('transaction_list/', views.transaction_list, name='transaction_list'),
     path('add_transaction/', views.add_transaction, name='add_transaction'),
     path('<str:transaction_id>/', views.transaction_detail, name='transaction_detail'),
+    path('delete_transaction/<str:transaction_id>/', views.delete_transaction, name='delete_transaction'),
 
 
     # You can add more URL patterns here for other views related to

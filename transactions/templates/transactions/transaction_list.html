@@ -8,6 +8,7 @@
             <a href="{% url 'transaction_detail' transaction.transaction_id %}">
                 {{ transaction.transaction_id }} - {{ transaction.ticker }}
             </a>
+            <a href="{% url 'delete_transaction' transaction.transaction_id %}" onclick="return confirm('Are you sure you want to delete this transaction?');">Delete</a>
         </li>
     {% empty %}
         <li>No transactions found.</li>
