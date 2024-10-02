@@ -32,9 +32,8 @@ def add_transaction(request):
         form = TransactionForm()
     return render(request, 'transactions/add_transaction.html', {'form': form})
 
-
-
 def delete_transaction(request, transaction_id):
     transaction = get_object_or_404(Transaction, transaction_id=transaction_id)
     transaction.delete()
+    messages.success(request, f"Successfully deleted transaction with ID {transaction_id}.")
     return redirect('transaction_list')
