@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from.models import Transaction
 from .forms import TransactionForm
 from django.contrib import messages  
+from .forms import UserRegistrationForm
+from django.contrib.auth import login
 
 
 @login_required
@@ -42,3 +44,16 @@ def delete_transaction(request, transaction_id):
     transaction.delete()
     messages.success(request, f"Successfully deleted transaction with ID {transaction_id}.")
     return redirect('transaction_list')
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, f"Account created for {user.username}!")
+            return redirect('home')
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'registration/register.html', {'form': form})
