@@ -10,10 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 import dj_database_url
-import os
-
+from django.core.exceptions import ImproperlyConfigured
+from dotenv import load_dotenv
+load_dotenv()
+# Function to get environment variables
+def get_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = f"Set the {var_name} environment variable"
+        raise ImproperlyConfigured(error_msg)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,11 +33,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-lq&upib1ln(n4jnvzpkm-j$d+kk8hlf2@l2^#11ouut)c#uy=g')
+SECRET_KEY = get_env_variable('DJANGO_SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 
 ALLOWED_HOSTS = ['magical-coin-tracker-e4f3fa405d71.herokuapp.com', 'localhost', '127.0.0.1']
@@ -85,7 +94,7 @@ WSGI_APPLICATION = 'transaction_tracker.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://user:pass@localhost/dbname',
+        default=f'postgres://{get_env_variable("DB_USER")}:{get_env_variable("DB_PASSWORD")}@{get_env_variable("DB_HOST")}/{get_env_variable("DB_NAME")}',
         conn_max_age=600
     )
 }
