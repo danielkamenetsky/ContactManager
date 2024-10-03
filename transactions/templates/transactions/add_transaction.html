@@ -1,35 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Transaction</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <!-- Include Tailwind CSS -->
-  </head>
-  <body class="bg-gray-200">
-    <!-- Set background color for the whole page -->
-    <div class="max-w-md mx-auto mt-8 p-4 bg-white shadow rounded">
-      <h1 class="text-xl font-bold mb-4">Add Transaction</h1>
-      <form method="POST">
-        {% csrf_token %} {% for field in form %}
-        <div class="mb-4">
-          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-          {{ field }}
+{% extends 'base.html' %}
 
-          <!-- Render the field directly -->
+{% block content %}
+<div class="max-w-md mx-auto mt-8 p-4 bg-white shadow rounded">
+    <h1 class="text-xl font-bold mb-4">Add Transaction</h1>
+    
+    <form method="POST" action="{% url 'add_transaction' %}" id="transactionForm">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="mb-4">
+            <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+            <p class="text-red-500 text-xs italic">{{ field.errors.0 }}</p>
+            {% endif %}
         </div>
         {% endfor %}
-        <button
-          type="submit"
-          class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-        >
-          Add Transaction
+        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="submitButton">
+            Add Transaction
         </button>
-      </form>
-    </div>
-  </body>
-</html>
+    </form>
+</div>
+
+<script>
+document.getElementById('transactionForm').addEventListener('submit', function(e) {
+    var submitButton = document.getElementById('submitButton');
+    if (submitButton.disabled) {
+        e.preventDefault();
+    } else {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+    }
+});
+</script>
+{% endblock %}

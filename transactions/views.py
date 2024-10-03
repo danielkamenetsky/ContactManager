@@ -6,6 +6,9 @@ from .forms import TransactionForm
 from django.contrib import messages  
 from .forms import UserRegistrationForm
 from django.contrib.auth import login
+import logging
+logger = logging.getLogger(__name__)
+
 
 
 @login_required
@@ -25,15 +28,24 @@ def transaction_detail(request, transaction_id):
 
 
 @login_required
+
 def add_transaction(request):
     if request.method == 'POST':
         form = TransactionForm(request.POST)
         if form.is_valid():
-            transaction = form.save(commit=False)
-            transaction.user = request.user
-            transaction.save()
-            messages.success(request, f"Transaction {transaction.transaction_id} created successfully.")
-            return redirect('transaction_detail', transaction_id=transaction.transaction_id)
+            try:
+                transaction = form.save(commit=False)
+                transaction.user = request.user
+                transaction.save()
+                logger.info(f"Transaction {transaction.transaction_id} created successfully for user {request.user.username}")
+                messages.success(request, f"Transaction {transaction.transaction_id} created successfully.")
+                return redirect('transaction_detail', transaction_id=transaction.transaction_id)
+            except Exception as e:
+                logger.error(f"Error creating transaction for user {request.user.username}: {str(e)}")
+                messages.error(request, "An error occurred while creating the transaction. Please try again.")
+        else:
+            logger.warning(f"Invalid form submission for user {request.user.username}: {form.errors}")
+            messages.error(request, "Please correct the errors below.")
     else:
         form = TransactionForm()
     return render(request, 'transactions/add_transaction.html', {'form': form})
