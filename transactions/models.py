@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 import uuid
 
 class Transaction(models.Model):
+    id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transactions')
     transaction_id = models.CharField(max_length=100, unique=True, default=uuid.uuid4, editable=False)
     ticker = models.CharField(max_length=50)
